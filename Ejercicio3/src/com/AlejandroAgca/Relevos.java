@@ -40,30 +40,33 @@ class Hilo extends Thread{
 }
 
 class Carrera{
+	int turno = 1;
 	boolean comienzo;
 	public Carrera() {
 		comienzo = false;
 	}
 	
 	public synchronized void RelevistaComienza(Hilo hilo) {
-		while(!comienzo){
+		while(!comienzo || hilo.numero != turno){
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("El hilo " + hilo.numero + " finaliza la carrera");
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
 		}
-		notify();
+		System.out.println("El hilo " + hilo.numero + " finaliza la carrera");
+		turno++;
+		notifyAll();
+		
 	}
 	
 	public synchronized void ComenzarCarrera(){
 		System.out.println("¡Comienza la carrera!");
 		comienzo = true;
-		notify();
+		notifyAll();
 	}
 }
