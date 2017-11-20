@@ -40,10 +40,11 @@ class Hilo extends Thread{
 }
 
 class Carrera{
-	int turno = 1;
+	int turno;
 	boolean comienzo;
 	public Carrera() {
 		comienzo = false;
+		turno = 1;
 	}
 	
 	public synchronized void RelevistaComienza(Hilo hilo) {
