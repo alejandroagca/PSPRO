@@ -70,13 +70,14 @@ class Almacen{
 	private int piezasQueLlegan;
 	private int piezasQueSalen;
 	private int dia;
-	boolean fin = true;
+	boolean fin;
 	
 	public Almacen() {
 		piezas = 8000;
 		maximo = 20000;
 		minimo = 0;
 		dia = 1;
+		fin = true;
 	}
 	
 	/*public synchronized void salidaDePiezas() {
