@@ -2,7 +2,6 @@ package com.AlejandroAgca;
 
 public class Principal {
 
-	public static boolean fin = true;
 	public static void main(String[] args) {
 		
 		Almacen miAlmacen = new Almacen();
@@ -32,7 +31,7 @@ class Retirada extends Thread{
 	
 	@Override
 	public void run() {
-		while(Principal.fin) {
+		while(almacen.fin) {
 		almacen.salidaDePiezas();
 		try { 
 			sleep(2400);
@@ -52,7 +51,7 @@ class Envio extends Thread{
 	
 	@Override
 	public void run() {
-		while(Principal.fin) {
+		while(almacen.fin) {
 		almacen.llegadaDePiezas();
 		try { 
 			sleep(800);
@@ -71,6 +70,7 @@ class Almacen{
 	private int piezasQueLlegan;
 	private int piezasQueSalen;
 	private int dia;
+	boolean fin = true;
 	
 	public Almacen() {
 		piezas = 8000;
@@ -102,7 +102,7 @@ notify();
 		System.out.println("Pedido de " + piezasQueSalen + " piezas");
 		if(piezas - piezasQueSalen < minimo) {
 			System.out.println("No hay piezas suficientes!");
-			Principal.fin = false;
+			fin = false;
 		}
 		else {
 			piezas = piezas - piezasQueSalen;
@@ -132,7 +132,7 @@ notify();
 		
 		if (piezas + piezasQueLlegan > maximo) {
 			System.out.println("El almacén esta lleno!");
-			Principal.fin = false;
+			fin = false;
 		}
 		else {
 			piezas = piezas + piezasQueLlegan;
